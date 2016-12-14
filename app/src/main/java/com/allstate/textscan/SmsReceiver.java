@@ -6,10 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
-import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SmsReceiver extends BroadcastReceiver{
 
@@ -24,10 +29,17 @@ public class SmsReceiver extends BroadcastReceiver{
                 String sender = smsMessage.getDisplayOriginatingAddress();
                 String messageBody = smsMessage.getMessageBody();
 
-                Toast toast = Toast.makeText(context, sender, Toast.LENGTH_LONG);
-                toast.show();
+                blacklistApiClient.getNumberAuthorization(sender).enqueue(new Callback<PhoneNumberAuthorization>() {
+                    @Override
+                    public void onResponse(Call<PhoneNumberAuthorization> call, Response<PhoneNumberAuthorization> response) {
+                        System.out.println(response.body().message);
+                    }
 
-                blacklistApiClient.getNumberAuthorization(sender);
+                    @Override
+                    public void onFailure(Call<PhoneNumberAuthorization> call, Throwable t) {
+                        System.out.println(t.getMessage());
+                    }
+                });
             }
         }
     }

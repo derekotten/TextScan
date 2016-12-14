@@ -8,5 +8,5 @@ import retrofit2.http.Path;
 public interface BlacklistApiClient {
 
     @GET("/blacklist/{phoneNumber}")
-    Call<NumberAuthorization> getNumberAuthorization(@Path("phoneNumber") String phoneNumber);
+    Call<PhoneNumberAuthorization> getNumberAuthorization(@Path("phoneNumber") String phoneNumber);
 }

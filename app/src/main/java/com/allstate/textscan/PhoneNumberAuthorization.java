@@ -1,8 +1,6 @@
 package com.allstate.textscan;
 
-public class NumberAuthorization {
+public class PhoneNumberAuthorization {
     Integer code;
     String message;
-
-
 }
