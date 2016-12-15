@@ -10,9 +10,14 @@ import retrofit2.Response;
 public class TextScanViewModel {
 
     @Inject BlacklistApiClient blacklistApiClient;
+    private Listener listener;
 
     TextScanViewModel() {
         Injector.getInjector().inject(this);
+    }
+
+    void register(Listener listener) {
+        this.listener = listener;
     }
 
     void authorizePhoneNumber(String phoneNumber) {
@@ -27,5 +32,9 @@ public class TextScanViewModel {
                 System.out.println(t.getMessage());
             }
         });
+    }
+
+    interface Listener {
+        void phoneAuthorizationComplete(Boolean authorized);
     }
 }
