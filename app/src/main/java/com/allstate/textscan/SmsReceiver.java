@@ -19,6 +19,7 @@ import retrofit2.Response;
 public class SmsReceiver extends BroadcastReceiver{
 
     @Inject BlacklistApiClient blacklistApiClient;
+    @Inject TextScanViewModel textScanViewModel;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,17 +30,7 @@ public class SmsReceiver extends BroadcastReceiver{
                 String sender = smsMessage.getDisplayOriginatingAddress();
                 String messageBody = smsMessage.getMessageBody();
 
-                blacklistApiClient.getNumberAuthorization(sender).enqueue(new Callback<PhoneNumberAuthorization>() {
-                    @Override
-                    public void onResponse(Call<PhoneNumberAuthorization> call, Response<PhoneNumberAuthorization> response) {
-                        System.out.println(response.body().message);
-                    }
-
-                    @Override
-                    public void onFailure(Call<PhoneNumberAuthorization> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                    }
-                });
+                textScanViewModel.authorizePhoneNumber(sender);
             }
         }
     }
