@@ -38,6 +38,7 @@ public class TextScanActivity extends AppCompatActivity implements TextScanViewM
 
     @Override
     public void phoneAuthorizationComplete(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
     }
 }
