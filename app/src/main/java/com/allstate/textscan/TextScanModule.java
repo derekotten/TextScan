@@ -32,7 +32,7 @@ public class TextScanModule {
         return retrofit.create(BlacklistApiClient.class);
     }
 
-    @Provides static TextScanViewModel provideTextScanViewModel() {
-        return new TextScanViewModel();
+    @Provides @Singleton TextScanViewModel provideTextScanViewModel(BlacklistApiClient blacklistApiClient) {
+        return new TextScanViewModel(blacklistApiClient);
     }
 }

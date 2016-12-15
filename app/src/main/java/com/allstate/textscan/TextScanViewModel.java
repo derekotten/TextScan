@@ -9,11 +9,11 @@ import retrofit2.Response;
 
 public class TextScanViewModel {
 
-    @Inject BlacklistApiClient blacklistApiClient;
+    private BlacklistApiClient blacklistApiClient;
     private Listener listener;
 
-    TextScanViewModel() {
-        Injector.getInjector().inject(this);
+    @Inject TextScanViewModel(BlacklistApiClient blacklistApiClient) {
+        this.blacklistApiClient = blacklistApiClient;
     }
 
     void register(Listener listener) {
@@ -25,6 +25,7 @@ public class TextScanViewModel {
             @Override
             public void onResponse(Call<PhoneNumberAuthorization> call, Response<PhoneNumberAuthorization> response) {
                 System.out.println(response.body().message);
+                listener.phoneAuthorizationComplete(response.body().message);
             }
 
             @Override
@@ -35,6 +36,6 @@ public class TextScanViewModel {
     }
 
     interface Listener {
-        void phoneAuthorizationComplete(Boolean authorized);
+        void phoneAuthorizationComplete(String message);
     }
 }

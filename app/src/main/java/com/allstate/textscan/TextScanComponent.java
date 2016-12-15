@@ -11,8 +11,9 @@ import retrofit2.Retrofit;
 public interface TextScanComponent {
     void inject(SmsReceiver smsReceiver);
 
-    void inject(TextScanViewModel textScanViewModel);
-
+    void inject(TextScanActivity textScanActivity);
     Retrofit retrofit();
     BlacklistApiClient blacklistApiClient();
+    TextScanViewModel textScanViewModel();
+
 }

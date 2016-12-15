@@ -18,7 +18,6 @@ import retrofit2.Response;
 
 public class SmsReceiver extends BroadcastReceiver{
 
-    @Inject BlacklistApiClient blacklistApiClient;
     @Inject TextScanViewModel textScanViewModel;
 
     @Override
